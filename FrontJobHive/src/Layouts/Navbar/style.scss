@@ -1,0 +1,72 @@
+.navbar {
+  width: 100%;
+  min-height: 150px;
+  &_top {
+    background-color: #555;
+    width: 100%;
+    min-height: 50px;
+    &_container {
+      max-width: 60%;
+      min-height: 50px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  &_bottom {
+    width: 100%;
+    min-height: 100px;
+    &_container {
+      max-width: 60%;
+      min-height: 100px;
+      display: flex;
+      margin: auto;
+      align-items: center;
+      justify-content: space-between;
+      &_logo {
+        img {
+          width: 260px;
+          cursor: pointer;
+        }
+      }
+      &_items{
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        &_login{
+            background-color: #fcffb0;
+            padding:0px 25px;
+            height: 40px;
+            border-radius: 5px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            color: #444444;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 300ms;
+            &:hover{
+                background-color: #FFF7D4;
+            }
+        }
+        &_wishlist{
+            background-color: #fcffb0;
+            width: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 8px;
+            color: #444444;
+            cursor: pointer;
+            transition: 300ms;
+            &:hover{
+                background-color: #fdf1bb;
+            }
+            i{
+                font-size: 18px;
+            }
+        }
+      }
+    }
+  }
+}
