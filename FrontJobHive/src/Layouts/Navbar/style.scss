@@ -1,13 +1,13 @@
 .navbar {
   width: 100%;
-  min-height: 150px;
+  min-height: 140px;
   &_top {
-    background-color: #555;
+    background-color: #fcffb0;
     width: 100%;
-    min-height: 50px;
+    min-height: 40px;
     &_container {
       max-width: 60%;
-      min-height: 50px;
+      min-height: 40px;
       margin: auto;
       display: flex;
       align-items: center;
@@ -47,7 +47,8 @@
             cursor: pointer;
             transition: 300ms;
             &:hover{
-                background-color: #FFF7D4;
+                background-color: #F9CC0B;
+                color: white;
             }
         }
         &_wishlist{
@@ -60,8 +61,8 @@
             cursor: pointer;
             transition: 300ms;
             &:hover{
-                background-color: #fdf1bb;
-            }
+              background-color: #F9CC0B;
+              color: white;            }
             i{
                 font-size: 18px;
             }

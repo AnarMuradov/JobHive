@@ -1,55 +1,35 @@
-import express from 'express'
-import mongoose from 'mongoose';
-import { Schema } from 'mongoose';
-const app = express()
-const port = 3000
-app.use(express.json())
-app.use(cors())
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import { cvRouter } from "./Router/cvRouter.js";
+import { commentRouter } from "./Router/commentRouter.js";
+import { vacancyRouter } from "./Router/vacancyRouter.js";
+import { userRouter } from "./Router/userRouter.js";
+import { authRouter } from "./Router/AuthRoute.js";
+import 'dotenv/config'
+import { vacancyCategoryRouter } from "./Router/vacancyCategoryRouter.js";
+import { cvCategoryRouter } from "./Router/cvCategoryRouter.js";
+const app = express();
+const port = 3000;
+app.use(express.json());
+app.use(cors());
 
 
-const vacancySchema = new Schema({
-    category:String,
-    position:String,
-    region:String,
-    age:String,
-    education:String,
-    experience:String,
-    requirements:String,
-    description:String,
-    company:String,
-    contact:String,
-    date:{
-        type:Date,default:Date.now
-    }
 
-  });
+app.use("/cv",cvRouter)
+app.use("/comments",commentRouter)
+app.use("/",vacancyRouter)
+app.use("/users",userRouter)
+app.use("/vacancycategories",vacancyCategoryRouter)
+app.use("/cvcategories",cvCategoryRouter)
+app.use("/",authRouter)
 
-const vacancyModel = mongoose.model('Vacancy', vacancySchema);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-  })
-  
-  app.post('/', (req, res) => {
-    res.send('Got a POST request')
-  })
-  
-  app.put('/user', (req, res) => {
-    res.send('Got a PUT request at /user')
-  })
-  
-  app.delete('/user', (req, res) => {
-    res.send('Got a DELETE request at /user')
-  })
-
-  
-mongoose.connect('mongodb://127.0.0.1:27017/test')
-.then(() => console.log('Connected!'));
+mongoose
+  .connect(process.env.SECRET_KEY)
+  .then(() => console.log("Connected!"))
+  .catch(()=>console.log("Not Connected"))
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});
