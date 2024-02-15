@@ -7,13 +7,13 @@ vacancyRouter.get("/vacancies",vacancyAllData);
 
 vacancyRouter.get("/vacancywithcategory",vacancyAllWithCategoryData);
 
-vacancyRouter.get("/vacancies/:id", vacancyDataById);
+vacancyRouter.get("/vacancies/:id", vacancyDataById); 
 
 vacancyRouter.get("/vacancybycategory/:id", vacancyByCategoryDataById);
 
 vacancyRouter.post("/vacancies", createVacancyData);
   
-
+ 
 vacancyRouter.put("/vacancies/:id", updateVacancyDataById);
   
 

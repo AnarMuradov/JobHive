@@ -11,6 +11,9 @@ const vacancySchema = new Schema({
     description: String,
     company: String,
     contact: String,
+    phone:String,
+    email:String,
+    salary:String,
     date: {
       type: Date,
       default: Date.now,

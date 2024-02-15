@@ -1,18 +1,20 @@
 import express from "express";
-import { createCvData, deleteCvDataById, getAllCvData, getCvDataById, updateCvDataById } from "../Controller/cvController.js";
+import { createCvData, cvAllWithCategoryData, cvByCategoryDataById, deleteCvDataById, getAllCvData, getCvDataById, updateCvDataById } from "../Controller/cvController.js";
 export const cvRouter = express.Router();
 
-cvRouter.get("/", getAllCvData);
+cvRouter.get("/cv", getAllCvData);
+  
+cvRouter.get("/cvwithcategory",cvAllWithCategoryData);
+
+cvRouter.get("/cv/:id",getCvDataById);
+
+cvRouter.get("/cvbycategory/:id", cvByCategoryDataById);
+
+cvRouter.post("/cv", createCvData);  
   
 
-cvRouter.get("/:id",getCvDataById);
-   
-
-cvRouter.post("/", createCvData);
+cvRouter.put("/cv/:id",updateCvDataById);
   
 
-cvRouter.put("/:id",updateCvDataById);
-  
-
-cvRouter.delete("/:id", deleteCvDataById);
+cvRouter.delete("/cv/:id", deleteCvDataById);
   

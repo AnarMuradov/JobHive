@@ -12,11 +12,11 @@ import { cvCategoryRouter } from "./Router/cvCategoryRouter.js";
 const app = express();
 const port = 3000;
 app.use(express.json());
-app.use(cors());
+app.use(cors()); 
 
 
 
-app.use("/cv",cvRouter)
+app.use("/",cvRouter)
 app.use("/comments",commentRouter)
 app.use("/",vacancyRouter)
 app.use("/users",userRouter)

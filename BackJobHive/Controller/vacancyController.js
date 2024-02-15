@@ -6,7 +6,7 @@ export const vacancyAllData = async (req, res) => {
     res.status(200).json(vacancies);
   } catch (error) {
     res.send(error.message);
-  }
+  } 
 };
 
 export const vacancyAllWithCategoryData = async (req, res) => {
@@ -41,7 +41,7 @@ export const vacancyByCategoryDataById = async (req, res) => {
 export const createVacancyData = async (req, res) => {
   try {
     const {
-      categoryId,
+      categoryId, 
       position,
       region,
       age,
@@ -51,6 +51,9 @@ export const createVacancyData = async (req, res) => {
       description,
       company,
       contact,
+      phone,
+      email,
+      salary
     } = req.body;
     const newVacancies = new vacancyModel({
       categoryId,
@@ -63,6 +66,9 @@ export const createVacancyData = async (req, res) => {
       description,
       company,
       contact,
+      phone,
+      email,
+      salary
     });
     await newVacancies.save();
     res.status(200).json(newVacancies);
@@ -85,6 +91,9 @@ export const updateVacancyDataById = async (req, res) => {
       description,
       company,
       contact,
+      phone,
+      email,
+      salary
     } = req.body;
     const vacancies = await vacancyModel.findByIdAndUpdate(id, {
       categoryId,
@@ -97,6 +106,9 @@ export const updateVacancyDataById = async (req, res) => {
       description,
       company,
       contact,
+      phone,
+      email,
+      salary
     });
     res.status(200).json(vacancies);
   } catch (error) {

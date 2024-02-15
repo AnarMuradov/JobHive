@@ -4,7 +4,7 @@ import { cvModel } from "../Model/cvModel.js";
 export const getAllCvData = async (req, res) => {
     try {
       const cv = await cvModel.find();
-      res.status(200).json(cv);
+      res.status(200).json(cv); 
     } catch (error) {
       res.send(error.message);
     }
@@ -44,7 +44,7 @@ export const getAllCvData = async (req, res) => {
         surname,
         patronymic,
         gender,
-        ageNumber,
+        age,
         education,
         experience,
         details,
@@ -61,7 +61,7 @@ export const getAllCvData = async (req, res) => {
         surname,
         patronymic,
         gender,
-        ageNumber,
+        age,
         education,
         experience,
         details,
@@ -88,7 +88,7 @@ export const getAllCvData = async (req, res) => {
         surname,
         patronymic,
         gender,
-        ageNumber,
+        age,
         education,
         experience,
         details,
@@ -105,7 +105,7 @@ export const getAllCvData = async (req, res) => {
         surname,
         patronymic,
         gender,
-        ageNumber,
+        age,
         education,
         experience,
         details,

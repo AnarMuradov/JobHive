@@ -1,8 +1,13 @@
 import React from 'react'
+import CategoriesSection from '../../Components/HomeSections/CategoriesSection'
+import AllVacancies from '../../Components/HomeSections/AllVacanciesSection'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <main>
+      <CategoriesSection/>
+      <AllVacancies/>
+    </main>
   )
 }
     
