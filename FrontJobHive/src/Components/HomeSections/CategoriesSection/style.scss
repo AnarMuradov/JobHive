@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: center;
   margin: auto;
+  a{
   .categoriesBox {
     width: 120px;
     height: 120px;
@@ -29,15 +30,18 @@
         rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
       color: white;
     }
+   }
   }
 }
 }
 @media only screen and (max-width: 950px) {
   .vacancySlider {
     &_container{
-    .categoriesBox {
-      width: 100px;
-      height: 100px;
+    a{
+      .categoriesBox {
+        width: 100px;
+        height: 100px;
+      }
     }
   }
   }
@@ -45,23 +49,27 @@
 @media only screen and (max-width: 768px) {
   .vacancySlider {
     &_container{
+   a{
     .categoriesBox {
       width: 75px;
       height: 75px;
       font-size: 12px;
     }
+   }
   }
 }
 }
 @media only screen and (max-width: 555px) {
   .vacancySlider {
     &_container{
-    .categoriesBox {
+    a{
+      .categoriesBox {
 
-      width: 50px;
-      height: 50px;
-      font-size: 8px;
-      overflow: hidden;
+        width: 50px;
+        height: 50px;
+        font-size: 8px;
+        overflow: hidden;
+      }
     }
   }
 }

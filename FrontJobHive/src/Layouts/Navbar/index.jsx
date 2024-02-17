@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.scss";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav className="navbar">
@@ -20,9 +21,12 @@ const Navbar = () => {
               <span>Login</span>
               <i className="fa-solid fa-arrow-right-to-bracket"></i>
             </div>
-            <div className="navbar_bottom_container_items_wishlist">
+           <Link to={"/wishlist"}>
+           <div className="navbar_bottom_container_items_wishlist">
               <i className="fa-regular fa-heart"></i>
             </div>
+           </Link>
+           
           </div>
         </div>
       </div>

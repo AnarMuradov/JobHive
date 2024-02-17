@@ -4,6 +4,7 @@ import { Navigation, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './style.scss'
+import { Link } from 'react-router-dom';
 
 const CvCategoriesSection = () => {
     const [api,setApi] = useState([])
@@ -25,10 +26,10 @@ const CvCategoriesSection = () => {
         {api.map((x)=>{
            return(
             <SwiperSlide key={x._id}>
-                <div className='categoriesBox'>
+                <Link to={`/cvcategory/${x._id}`}><div className='categoriesBox'>
                 {x.category}
                 
-                </div>
+                </div></Link>
                 </SwiperSlide>
            )
         })

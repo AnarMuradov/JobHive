@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
+import { WishListContext } from "../../../Context/WishListContext";
+import { Link } from "react-router-dom";
 const AllCvSection = () => {
+    const {addWishList,removeWishList,isWishList} = useContext(WishListContext)
     const [api, setApi] = useState([]);
   useEffect(() => {
     fetch("http://localhost:3000/cv")
@@ -17,11 +20,11 @@ const AllCvSection = () => {
             <div key={x._id} className="allCv_container_allCards_card">
               <div className="allCv_container_allCards_card_content">
               <div className="allCv_container_allCards_card_content_title">
-              <div className="allCv_container_allCards_card_content_title_vacancyName">
+              <Link to={`/cvdetailpage/${x._id}`}><div className="allCv_container_allCards_card_content_title_vacancyName">
               {x.position}
-              </div>
+              </div></Link>
               <div className="allCv_container_allCards_card_content_title_name">
-                  {x.name} {x.surname}
+              {x.name} {x.surname}
               </div>
               <div    className="allCv_container_allCards_card_content_title_published">
               <i className="fa-regular fa-calendar"></i>
@@ -29,8 +32,8 @@ const AllCvSection = () => {
               </div>
               </div>
               <div className="allCv_container_allCards_card_content_salary">
-              <div className="allCv_container_allCards_card_content_salary_wishlist">
-              <i className="fa-regular fa-heart"></i>
+              <div className="allCv_container_allCards_card_content_salary_wishlist" onClick={()=>addWishList(x)}>
+              {!isWishList(x) ? <i className="fa-regular fa-heart"></i> :<i onClick={()=>removeWishList(x)} className="fa-solid fa-heart"></i>}
               </div>
 
               <div className="allCv_container_allCards_card_content_salary_slr">
