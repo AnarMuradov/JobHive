@@ -2,7 +2,7 @@
   width: 100%;
   min-height: 140px;
   &_top {
-    background-color: #122D42 ;
+    background-color: #122d42;
     width: 100%;
     min-height: 40px;
     color: white;
@@ -13,6 +13,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      a {
+        color: white;
+      }
     }
   }
   &_bottom {
@@ -38,58 +41,92 @@
           }
         }
       }
-      &_items{
+      &_items {
         display: flex;
-        gap: 30px;
+        gap: 20px;
         align-items: center;
-        &_login{
-            background-color: #3E6B89;
-            padding:0px 25px;
-            height: 40px;
-            border-radius: 5px;
-            display: flex;
-            gap: 10px;
-            align-items: center;
+        &_login {
+          background-color: #3e6b89;
+          padding: 0px 25px;
+          height: 40px;
+          border-radius: 5px;
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          color: white;
+          font-size: 15px;
+          cursor: pointer;
+          transition: 300ms;
+          &:hover {
+            background-color: #557f9b;
             color: white;
-            font-size: 15px;
-            cursor: pointer;
-            transition: 300ms;
-            &:hover{
-                background-color: #557f9b;
-                color: white;
-            }
+          }
         }
-        @media only screen and (max-width: 768px){
-          &_login{
-            display: none;
+        &_ad {
+          background-color: #3e6b89;
+          padding: 0px 25px;
+          height: 40px;
+          border-radius: 5px;
+          display: flex;
+          gap: 10px;
+          align-items: center;
+          color: white;
+          font-size: 14px;
+          cursor: pointer;
+          transition: 300ms;
+          &:hover {
+            background-color: #557f9b;
+            color: white;
           }
         }
 
-        &_wishlist{
-            background-color: #3E6B89;
-            width: 40px;
-            line-height: 40px;
-            text-align: center;
-            border-radius: 8px;
+        &_wishlist {
+          background-color: #3e6b89;
+          width: 40px;
+          line-height: 40px;
+          text-align: center;
+          border-radius: 8px;
+          color: white;
+          cursor: pointer;
+          transition: 300ms;
+          &:hover {
+            background-color: #557f9b;
             color: white;
-            cursor: pointer;
-            transition: 300ms;
-            &:hover{
-              background-color: #557f9b;
-              color: white;            }
-            i{
-                font-size: 18px;
-            }
+          }
+          i {
+            font-size: 18px;
+          }
         }
         @media only screen and (max-width: 555px) {
-          &_wishlist{
+          &_wishlist {
             width: 30px;
             line-height: 30px;
-            i{
-                font-size: 14px;
+            i {
+              font-size: 14px;
             }
+          }
+          &_login {
+            height: 30px;
+            font-size: 14px;
+            padding: 0 15px;
+            i {
+              font-size: 14px;
+            }
+          }
+          &_ad {
+            height: 30px;
+            width: 70px;
+            font-size: 12px;
+            padding: 0 15px;
+          }
         }
-        }
+      }
+    }
+    @media only screen and (max-width: 1000px) {
+      &_container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
       }
     }
   }

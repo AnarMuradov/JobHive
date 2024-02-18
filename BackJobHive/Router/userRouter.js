@@ -9,12 +9,12 @@ import {
 import { authMiddleware } from "../Middleware/AuthMiddleware.js";
 export const userRouter = express.Router();
 
-userRouter.get("/", getAllUserData);
+userRouter.get("/",authMiddleware(["Admin"]),  getAllUserData);
 
-userRouter.get("/:id",authMiddleware(["Admin"]), getUserById);
+userRouter.get("/:id",authMiddleware(["User","Admin"]), getUserById);
 
-userRouter.post("/", createUser);
+userRouter.post("/",authMiddleware(["Admin"]),  createUser);
  
-userRouter.put("/:id",authMiddleware(["User","Admin"]), updateUserById);
+userRouter.put("/:id",authMiddleware(["Admin"]), updateUserById);
 
 userRouter.delete("/:id",authMiddleware(["Admin"]), deleteUserById);

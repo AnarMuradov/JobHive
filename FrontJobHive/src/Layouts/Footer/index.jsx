@@ -17,8 +17,8 @@ const Footer = () => {
             </div>
             <div className="footer_container_content_block_items">
               <ul className="footer_container_content_block_items_list">
-                <li>About</li>
-                <li>Advertising</li>
+                <Link to={'/about'}><li>About</li></Link>
+               <Link to={"/advertising"}> <li>Advertising</li></Link>
               </ul>
             </div>
           </div>

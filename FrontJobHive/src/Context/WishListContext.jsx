@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 import useLocal from "../Hooks/useLocal";
-export const WishListContext = createContext();
+export const WishListContext = createContext(); 
 function WishListProvider({ children }) {
   const [wishlist, setWishlist] = useLocal("wishlist", []);
   function addWishList(item) {

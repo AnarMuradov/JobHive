@@ -2,9 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
 import { Link, useParams } from "react-router-dom";
 import { WishListContext } from "../../Context/WishListContext";
+import { SearchContext } from "../../Context/SearchContext";
 
 const VacancyCategoryPage = () => {
     const [api, setApi] = useState([]);
+    const {search,setSearch} = useContext(SearchContext)
+
     const [category, setCategory] = useState([]);
     const {addWishList,removeWishList,isWishList} = useContext(WishListContext)
     const { id } = useParams();
@@ -24,7 +27,10 @@ const VacancyCategoryPage = () => {
     <div className="vacancyCategory_container">
       <div className="vacancyCategory_container_title">{category.category}</div>
       <div className="vacancyCategory_container_allCards">
-        {api.map((x) => {
+        {api.filter((x) =>
+                    x.position.toLowerCase().includes(search.toLowerCase()) ||x.company.toLowerCase().includes(search.toLowerCase())
+                  )
+        .map((x) => {
           return (
             <div key={x._id} className="vacancyCategory_container_allCards_card">
               <div className="vacancyCategory_container_allCards_card_content">

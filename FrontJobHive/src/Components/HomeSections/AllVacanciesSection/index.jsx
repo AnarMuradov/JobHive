@@ -2,7 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
 import { WishListContext } from "../../../Context/WishListContext";
 import { Link } from "react-router-dom";
+import { SearchContext } from "../../../Context/SearchContext";
 const AllVacancies = () => {
+  const {search,setSearch} = useContext(SearchContext)
   const [api, setApi] = useState([]);
   const {addWishList,removeWishList,isWishList} = useContext(WishListContext)
 
@@ -16,7 +18,10 @@ const AllVacancies = () => {
       <div className="allVacancies_container">
         <div className="allVacancies_container_title">All Vacancies</div>
         <div className="allVacancies_container_allCards">
-          {api.map((x) => {
+          {api.filter((x) =>
+                    x.position.toLowerCase().includes(search.toLowerCase()) ||x.company.toLowerCase().includes(search.toLowerCase())
+                  )
+          .map((x) => {
             return (
               <div key={x._id} className="allVacancies_container_allCards_card">
                 <div className="allVacancies_container_allCards_card_content">
