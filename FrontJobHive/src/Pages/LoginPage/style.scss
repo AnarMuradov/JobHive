@@ -11,12 +11,17 @@
   &_container {
     width: 500px;
     min-height: 400px;
-    background-color: white;
+    // background-color: white;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
       rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
       rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    border-radius: 20px;
+    // border-radius: 20px;
 
+    backdrop-filter: blur(16px) saturate(200%);
+    -webkit-backdrop-filter: blur(16px) saturate(200%);
+    background-color: rgba(255, 255, 255, 0.57);
+    border-radius: 12px;
+    border: 1px solid rgba(209, 213, 219, 0.3);
     &_content {
       max-width: 80%;
       height: 100%;
@@ -40,13 +45,15 @@
         align-items: center;
 
         input {
+          padding: 5px;
           font-size: 17px;
           height: 20px;
           border: none;
           border-bottom: 3px solid rgb(70, 70, 70);
-
+          background: transparent;
+          color: white;
           &::placeholder {
-            color: #051623;
+            color: white;
           }
 
           outline-color: transparent;
@@ -74,6 +81,9 @@
             box-shadow: 0 0 0 0.15rem #5ceace;
           }
         }
+        span {
+          color: #122d42;
+        }
       }
 
       a {
@@ -82,6 +92,12 @@
       }
     }
   }
+  @media only screen and (max-width: 550px) {
+    &_container {
+      width: 280px;
+    }
+  }
+
   p {
     color: white;
     a {
@@ -90,8 +106,78 @@
       text-decoration: underline;
       transition: 200ms;
       &:hover {
-        color: #122d42;
+        color: #7fa9c9;
       }
     }
+  }
+}
+
+@mixin dots($count) {
+  $text-shadow: ();
+  @for $i from 0 through $count {
+    $text-shadow: $text-shadow,
+      (-0.5+ (random()) * 3) +
+        em
+        (-0.5+ (random()) * 3) +
+        em
+        7px
+        hsla(random() * 360, 100%, 50%, 0.9);
+  }
+  text-shadow: $text-shadow;
+}
+
+.login {
+  background: rgb(22, 53, 83);
+}
+
+.login {
+  color: transparent;
+}
+
+.login::before,
+.login::after,
+.login::before,
+.login::after {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 3em;
+  height: 3em;
+  content: ".";
+  mix-blend-mode: screen;
+  animation: 44s -27s move infinite ease-in-out alternate;
+  z-index: -1;
+}
+
+body::before {
+  @include dots(40);
+  animation-duration: 44s;
+  animation-delay: -27s;
+}
+
+body::after {
+  @include dots(40);
+  animation-duration: 43s;
+  animation-delay: -32s;
+}
+
+head::before {
+  @include dots(40);
+  animation-duration: 42s;
+  animation-delay: -23s;
+}
+
+head::after {
+  @include dots(40);
+  animation-duration: 41s;
+  animation-delay: -19s;
+}
+
+@keyframes move {
+  from {
+    transform: rotate(0deg) scale(12) translateX(-20px);
+  }
+  to {
+    transform: rotate(360deg) scale(18) translateX(20px);
   }
 }

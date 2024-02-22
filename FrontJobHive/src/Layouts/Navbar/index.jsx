@@ -12,14 +12,20 @@ const Navbar = () => {
           <Link to={"/advertising"}>
             <div className="navbar_top_container_ad">Advertising</div>
           </Link>
-
+          {decode?.role === "Admin" ? (
+            <Link to={"/AdminPanel"}>
+              <div className="navbar_top_container_adminPanel">Admin Panel</div>
+            </Link>
+          ) : null}
           <div className="navbar_top_container_theme">DarkMode</div>
         </div>
       </div>
       <div className="navbar_bottom">
         <div className="navbar_bottom_container">
           <div className="navbar_bottom_container_logo">
-            <img src="/src/Image/logo.png" alt="" />
+            <Link to={"/"}>
+              <img src="/src/Image/footer_logo.png" alt="" />
+            </Link>
           </div>
           <div className="navbar_bottom_container_items">
             {decode ? (
@@ -33,9 +39,11 @@ const Navbar = () => {
                   <span>LogOut</span>
                   <i className="fa-solid fa-arrow-right-to-bracket"></i>
                 </div>
-                <div className="navbar_bottom_container_items_ad">
-                  Post your ad
-                </div>
+                <Link to={"/PostYourAd"}>
+                  <div className="navbar_bottom_container_items_ad">
+                    Post your ad
+                  </div>
+                </Link>
               </>
             ) : (
               <>

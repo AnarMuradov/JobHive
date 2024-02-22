@@ -6,7 +6,7 @@ export const vacancyAllData = async (req, res) => {
     res.status(200).json(vacancies);
   } catch (error) {
     res.send(error.message);
-  } 
+  }
 };
 
 export const vacancyAllWithCategoryData = async (req, res) => {
@@ -22,6 +22,8 @@ export const vacancyDataById = async (req, res) => {
   try {
     const { id } = req.params;
     const vacancies = await vacancyModel.findById(id);
+    vacancies.view = vacancies.view + 1;
+    await vacancies.save();
     res.status(200).json(vacancies);
   } catch (error) {
     res.send(error.message);
@@ -31,17 +33,17 @@ export const vacancyDataById = async (req, res) => {
 export const vacancyByCategoryDataById = async (req, res) => {
   try {
     const { id } = req.params;
-    const vacancies = await vacancyModel.find({categoryId:id});
+    const vacancies = await vacancyModel.find({ categoryId: id });
     res.status(200).json(vacancies);
   } catch (error) {
-    res.send(error.message);  
+    res.send(error.message);
   }
 };
 
 export const createVacancyData = async (req, res) => {
   try {
     const {
-      categoryId, 
+      categoryId,
       position,
       region,
       age,
@@ -53,7 +55,8 @@ export const createVacancyData = async (req, res) => {
       contact,
       phone,
       email,
-      salary
+      salary,
+      view,
     } = req.body;
     const newVacancies = new vacancyModel({
       categoryId,
@@ -68,7 +71,8 @@ export const createVacancyData = async (req, res) => {
       contact,
       phone,
       email,
-      salary
+      salary,
+      view,
     });
     await newVacancies.save();
     res.status(200).json(newVacancies);
@@ -93,7 +97,8 @@ export const updateVacancyDataById = async (req, res) => {
       contact,
       phone,
       email,
-      salary
+      salary,
+      view,
     } = req.body;
     const vacancies = await vacancyModel.findByIdAndUpdate(id, {
       categoryId,
@@ -108,7 +113,8 @@ export const updateVacancyDataById = async (req, res) => {
       contact,
       phone,
       email,
-      salary
+      salary,
+      view,
     });
     res.status(200).json(vacancies);
   } catch (error) {

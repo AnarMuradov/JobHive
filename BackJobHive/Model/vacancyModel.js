@@ -18,6 +18,10 @@ const vacancySchema = new Schema({
       type: Date,
       default: Date.now,
     },
+    view:{
+      type:Number,
+      default:0,
+    }
   });
   
  export const vacancyModel = mongoose.model("Vacancy", vacancySchema);

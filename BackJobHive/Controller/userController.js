@@ -1,3 +1,4 @@
+import { populate } from "dotenv";
 import { userModel } from "../Model/userModel.js";
 
 export const getAllUserData = async (req, res) => {
@@ -30,7 +31,7 @@ export const createUser = async (req, res) => {
       username,
       email,
       password,
-      role,
+      role, 
     });
     await newUser.save();
     res.status(200).json(newUser);
@@ -53,7 +54,70 @@ export const updateUserById = async (req, res) => {
   } catch (error) {
     res.send(error.message);
   }
-};
+}; 
+export const addWishlist = async (req, res) => {
+  try {
+    const {id,vacancyId } = req.body;
+    const user= await userModel.findById(id);
+    if(vacancyId ===""){
+      user.vacancyWishlist = []
+      await user.save()
+      return res.status(200).json(user);
+    }
+    const index = user.vacancyWishlist.findIndex(x=>x == vacancyId)
+    if(index === -1){
+      user.vacancyWishlist.push(vacancyId)
+     await user.save() 
+    return res.status(200).json(user);
+    }
+    user.vacancyWishlist = user.vacancyWishlist.filter(x=>x != vacancyId)
+    await user.save()
+    res.status(200).json(user);
+  } catch (error) {
+    res.send(error.message);
+  }
+}; 
+
+export const addCvWishlist = async (req, res) => {
+  try {
+    const {id,vacancyId } = req.body;
+    const user= await userModel.findById(id);
+    if(vacancyId ===""){
+      user.cvWishlist = []
+      await user.save()
+      return res.status(200).json(user);
+    }
+    const index = user.cvWishlist.findIndex(x=>x == vacancyId)
+    if(index === -1){
+      user.cvWishlist.push(vacancyId)
+     await user.save() 
+    return res.status(200).json(user);
+    }
+    user.cvWishlist = user.cvWishlist.filter(x=>x != vacancyId)
+    await user.save()
+    res.status(200).json(user);
+  } catch (error) {
+    res.send(error.message);
+  }
+}; 
+export const showWishlist = async (req, res) => {
+  try {
+    const {id} = req.body;
+    const user= await userModel.findById(id).populate("vacancyWishlist")
+    res.status(200).json(user);
+  } catch (error) {
+    res.send(error.message);
+  }
+};  
+export const showCvWishlist = async (req, res) => {
+  try {
+    const {id} = req.body;
+    const user= await userModel.findById(id).populate("cvWishlist")
+    res.status(200).json(user);
+  } catch (error) {
+    res.send(error.message);
+  }
+};  
 
 export const deleteUserById = async (req, res) => {
   try {

@@ -8,7 +8,7 @@ export const getAllCvData = async (req, res) => {
     } catch (error) {
       res.send(error.message);
     }
-  }
+  } 
   export const cvAllWithCategoryData = async (req, res) => {
     try {
       const cv = await cvModel.find().populate("categoryId");
@@ -31,12 +31,15 @@ export const getAllCvData = async (req, res) => {
   export const getCvDataById= async (req, res) => {
     try {
       const { id } = req.params;
-      const cv = await cvModel.findById(id);
+    const cv = await cvModel.findById(id);
+    cv.view = cv.view + 1;
+    await cv.save();
       res.status(200).json(cv);
     } catch (error) {
       res.send(error.message);
     }
   }
+  
 
   export const createCvData = async (req, res) => {
     try {
@@ -55,7 +58,7 @@ export const getAllCvData = async (req, res) => {
         skills,
         about,
         email,
-        phones } = req.body;
+        phones,view } = req.body;
       const newCv = new cvModel({
         name,
         surname,
@@ -72,7 +75,7 @@ export const getAllCvData = async (req, res) => {
         skills,
         about,
         email,
-        phones
+        phones,view
       });
       await newCv.save();
       res.status(200).json(newCv);
@@ -99,7 +102,7 @@ export const getAllCvData = async (req, res) => {
         skills,
         about,
         email,
-        phones } = req.body;
+        phones,view } = req.body;
       const cv = await cvModel.findByIdAndUpdate(id, {
         name,
         surname,
@@ -116,7 +119,7 @@ export const getAllCvData = async (req, res) => {
         skills,
         about,
         email,
-        phones
+        phones,view
       });
       res.status(200).json(cv);
     } catch (error) {

@@ -1,22 +1,26 @@
+import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
 function UserProvider({ children }) {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(Cookies.get("token") ? Cookies.get("token") : null);
   const [decode, setDecode] = useState(null);
   function addToken(token) {
-    setToken(token);
-    console.log(token);
-    const token_decoded = jwtDecode(token);
-    console.log(token_decoded);
-    setDecode(token_decoded);
+    setToken(token)
+        Cookies.set('token', token, { expires: 1 })
+    }
+  useEffect(() => {
+    if (token) {
+      setDecode(jwtDecode(token))
   }
+}, [token])
+  
   function LogOut(){
     setToken(null);
     setDecode(null);
-
+    Cookies.remove('token')
   }
   return (
     <UserContext.Provider value={{ token, decode, addToken,LogOut }}>

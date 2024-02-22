@@ -11,7 +11,7 @@
     gap: 40px;
 
     &_title {
-      color: #122d42;
+      color: white;
       font-size: 20px;
       font-weight: bold;
     }
@@ -23,15 +23,21 @@
       row-gap: 20px;
 
       &_card {
+        backdrop-filter: blur(16px) saturate(200%);
+        -webkit-backdrop-filter: blur(16px) saturate(200%);
+        background-color: rgba(255, 255, 255, 0);
+        border-radius: 12px;
+        border: 1px solid rgb(209, 213, 219);
+
         max-width: 450px;
         min-height: 140px;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
           rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-          transition: 300ms;
-          &:hover {
-            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-              rgba(0, 0, 0, 0.22) 0px 15px 12px;
-          }
+        transition: 300ms;
+        &:hover {
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        }
         &_content {
           width: 95%;
           min-height: 140px;
@@ -45,24 +51,24 @@
             flex-direction: column;
             gap: 8px;
             &_vacancyName {
-              a{
+              a {
                 font-size: 14px;
-                color: #1c4c4b;
+                color: white;
                 font-weight: bold;
                 cursor: pointer;
                 transition: 300ms;
                 &:hover {
-                  color: #3e6b89;
+                  color: #5397c4;
                 }
-               }
+              }
             }
             &_companyName {
               font-size: 16px;
-              color: #122d42;
+              color: #288edb;
               font-style: italic;
             }
             &_published {
-              color: grey;
+              color: white;
               font-size: 14px;
               i {
                 padding-right: 8px;
@@ -76,19 +82,22 @@
             align-items: flex-end;
             gap: 15px;
             &_wishlist {
-              i {
+              .fa-regular {
                 font-size: 26px;
-                color: #122d42;
+                color: white !important;
                 cursor: pointer;
                 transition: 300ms;
                 &:hover {
-                  color: #3dd2cc;
+                  color: #5397c4;
                 }
               }
             }
             &_slr {
-              color: #3e6b89;
+              color: #288edb;
               font-weight: bold;
+            }
+            &_view {
+              color: white;
             }
           }
         }
@@ -103,21 +112,22 @@
           &_content {
             &_title {
               &_vacancyName {
-                font-size: 10px;
+                a {
+                  font-size: 10px;
+                }
               }
               &_companyName {
                 font-size: 11px;
               }
               &_published {
-                color: grey;
                 font-size: 10px;
               }
             }
             &_salary {
               &_wishlist {
                 .fa-regular {
-                  font-size: 26px;
-                  color: #122d42;
+                  font-size: 22px;
+                  color: white;
                   cursor: pointer;
                   transition: 300ms;
                   &:hover {
@@ -132,6 +142,9 @@
               }
               &_slr {
                 font-size: 11px;
+              }
+              &_view {
+                font-size: 12px;
               }
             }
           }

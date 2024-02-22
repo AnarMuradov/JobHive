@@ -1,6 +1,6 @@
 .seachSct {
   width: 100%;
-  background-color: #3dd2cc;
+  background-color: #105f93;
   min-height: 80px;
   &_container {
     max-width: 60%;
@@ -29,7 +29,7 @@
         width: 80px;
         height: 50px;
         background: none;
-        border: 4px solid #122d42;
+        border: 4px solid white;
         border-radius: 50px;
         box-sizing: border-box;
         font-size: 26px;
@@ -41,12 +41,17 @@
       }
       .active {
         width: 350px;
-        background: #808d96;
+        background: rgba(255, 255, 255, 0.158);
         border-radius: 10px;
         color: white;
         cursor: text;
       }
       @media only screen and (max-width: 555px) {
+        input {
+          padding: 0;
+          width: 70px;
+          height: 40px;
+        }
         .active {
           width: 220px;
           height: 40px;
@@ -58,12 +63,18 @@
         right: 15px;
         transform: translate(-50%, -50%);
         font-size: 26px;
-        color: #122d42;
+        color: white;
         transition: 0.2s;
         cursor: pointer;
       }
+      @media only screen and (max-width: 555px) {
+        i {
+          font-size: 22px;
+        }
+      }
+
       &:hover i {
-        color: white;
+        color: rgb(255, 255, 255);
       }
     }
     .fa-x {

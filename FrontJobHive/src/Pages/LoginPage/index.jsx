@@ -1,14 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import "./style.scss";
 import { UserContext } from "../../Context/UserContext";
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const { addToken } = useContext(UserContext);
-  const navigate =useNavigate()
-  function handleSubmit(e) {
-    e.preventDefault();
+  const navigate = useNavigate();
+  function handleSubmit({ email, password }) {
     fetch("http://localhost:3000/login", {
       method: "POST",
       headers: {
@@ -20,7 +19,7 @@ const LoginPage = () => {
       .then((res) => res.json())
       .then((data) => {
         addToken(data);
-        navigate("/")
+        navigate("/");
       });
   }
   return (
@@ -28,26 +27,39 @@ const LoginPage = () => {
       <div className="login_container">
         <div className="login_container_content">
           <div className="login_container_content_title">Login</div>
-          <form action="" onClick={handleSubmit}>
-            <input
-              type="text"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-            />
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-            />
-            <button>Sign in</button>
-          </form>
-          <Link>Lost your Password?</Link>
+
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={Yup.object({
+              email: Yup.string()
+                .email("Invalid email address")
+                .required(<span>Required</span>),
+              password: Yup.string()
+                .min(4, "Too short!")
+                .required(<span>Required</span>),
+            })}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                handleSubmit(values);
+                setSubmitting(false);
+              }, 400);
+            }}
+          >
+            <Form>
+              <Field name="email" type="email" placeholder="Email" />
+              <ErrorMessage name="email" />
+
+              <Field name="password" type="password" placeholder="Password" />
+              <ErrorMessage name="password" />
+
+              <button type="submit">Submit</button>
+            </Form>
+          </Formik>
+          <Link to={"/login/help"}>Lost your Password?</Link>
         </div>
       </div>
       <p>
-        Don't have an account?<Link to={'/register'}>Sign up here!</Link>
+        Don't have an account?<Link to={"/register"}>Sign up here!</Link>
       </p>
     </section>
   );

@@ -44,6 +44,9 @@ const AllVacancies = () => {
                 <div className="allVacancies_container_allCards_card_content_salary_slr">
                 {x.salary} AZN
                 </div>
+                <div className="allVacancies_container_allCards_card_content_salary_view">
+                <i className="fa-regular fa-eye"></i> {x.view}
+                </div>
                 </div>
 
                 </div>

@@ -17,6 +17,11 @@
         color: white;
       }
     }
+    @media only screen and (max-width: 510px) {
+      &_container {
+        font-size: 10px;
+      }
+    }
   }
   &_bottom {
     width: 100%;

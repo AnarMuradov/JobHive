@@ -7,7 +7,7 @@ cvRouter.get("/cv", getAllCvData);
 cvRouter.get("/cvwithcategory",cvAllWithCategoryData);
 
 cvRouter.get("/cv/:id",getCvDataById);
-
+ 
 cvRouter.get("/cvbycategory/:id", cvByCategoryDataById);
 
 cvRouter.post("/cv", createCvData);  
