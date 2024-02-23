@@ -3,9 +3,12 @@ import "./style.scss";
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { SearchContext } from "../../../Context/SearchContext";
+import { useTranslation } from "react-i18next";
 const SearchSeaction = () => {
   const { search, setSearch } = useContext(SearchContext);
   const [isOpen, setIsOpen] = useState(false);
+  const { t, i18n } = useTranslation();
+
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -20,7 +23,7 @@ const SearchSeaction = () => {
                 isPending ? "pending" : isActive ? "active" : ""
               }
             >
-              Vacancies
+              {t("title_Vacancy")}
             </NavLink>
           </div>
           <div className="seachSct_container_items_">
@@ -30,7 +33,7 @@ const SearchSeaction = () => {
                 isPending ? "pending" : isActive ? "active" : ""
               }
             >
-              CV's
+              {t("title_Cv")}
             </NavLink>
           </div>
         </div>

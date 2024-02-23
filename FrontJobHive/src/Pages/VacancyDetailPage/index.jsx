@@ -1,9 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { WishListContext } from "../../Context/WishListContext";
+
 import "./style.scss";
+import { useTranslation } from "react-i18next";
+import { UserContext } from "../../Context/UserContext";
 
 const VacancyDetailPage = () => {
+  const { t, i18n } = useTranslation();
+
   const [api, setApi] = useState([]);
   const { id } = useParams();
   useEffect(() => {
@@ -11,9 +15,21 @@ const VacancyDetailPage = () => {
       .then((res) => res.json())
       .then((data) => setApi(data));
   }, []);
-  const { addWishList, removeWishList, isWishList } =
-    useContext(WishListContext);
+  const {token,decode} = useContext(UserContext)
 
+  function handleWishlist(vacancyId) {
+
+    fetch("http://localhost:3000/users/addwishlist", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id: decode.id,  vacancyId: vacancyId  }),
+    });
+    console.log(decode);
+
+  }
   return (
     <section className="vacancyDetail">
       <div className="vacancyDetail_container">
@@ -30,16 +46,10 @@ const VacancyDetailPage = () => {
             <div className="vacancyDetail_container_title_content_salaryColumn">
               <div
                 className="vacancyDetail_container_title_content_salaryColumn_wishlist"
-                onClick={() => addWishList(api)}
+                onClick={() => handleWishlist(api._id)}
               >
-                {!isWishList(api) ? (
                   <i className="fa-regular fa-heart"></i>
-                ) : (
-                  <i
-                    onClick={() => removeWishList(api)}
-                    className="fa-solid fa-heart"
-                  ></i>
-                )}
+               
               </div>
               <div className="vacancyDetail_container_title_content_salaryColumn_salary">
                 {api.salary} AZN
@@ -51,10 +61,10 @@ const VacancyDetailPage = () => {
           <div className="vacancyDetail_container_vacancyInfo_content">
             <div className="vacancyDetail_container_vacancyInfo_content_column">
               <ul className="vacancyDetail_container_vacancyInfo_content_column_list1">
-                <li>Region</li>
-                <li>Age</li>
-                <li>Education</li>
-                <li>Experience</li>
+                <li>{t("detail_region")}</li>
+                <li>{t("detail_age")}</li>
+                <li>{t("detail_education")}</li>
+                <li>{t("detail_experience")}</li>
               </ul>
               <ul className="vacancyDetail_container_vacancyInfo_content_column_list">
                 <li>{api.region}</li>
@@ -65,10 +75,10 @@ const VacancyDetailPage = () => {
             </div>
             <div className="vacancyDetail_container_vacancyInfo_content_column">
               <ul className="vacancyDetail_container_vacancyInfo_content_column_list1">
-                <li>Phone</li>
+                <li>{t("cv_detail_phone")}</li>
                 <li>Email</li>
-                <li>Contact</li>
-                <li>Published on</li>
+                <li>{t("vacancy_contact")}</li>
+                <li>{t("cv_detail_published")}</li>
               </ul>
               <ul className="vacancyDetail_container_vacancyInfo_content_column_list">
                 <Link to={`tel:${api.phone}`}>
@@ -86,11 +96,11 @@ const VacancyDetailPage = () => {
         <div className="vacancyDetail_container_description">
           <div className="vacancyDetail_container_description_content">
             <div className="vacancyDetail_container_description_content_text">
-              <span>Job description</span>
+              <span>{t("vacancy_description")}</span>
               <p>{api.description}</p>
             </div>
             <div className="vacancyDetail_container_description_content_text">
-              <span>Requirements</span>
+              <span>{t("vacancy_requirements")}</span>
               <p>{api.requirements}</p>
             </div>
           </div>

@@ -4,8 +4,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./style.scss";
 import { UserContext } from "../../Context/UserContext";
+import { useTranslation } from "react-i18next";
 const LoginPage = () => {
   const { addToken } = useContext(UserContext);
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   function handleSubmit({ email, password }) {
     fetch("http://localhost:3000/login", {
@@ -26,17 +28,17 @@ const LoginPage = () => {
     <section className="login">
       <div className="login_container">
         <div className="login_container_content">
-          <div className="login_container_content_title">Login</div>
+          <div className="login_container_content_title">{t("login")}</div>
 
           <Formik
             initialValues={{ email: "", password: "" }}
             validationSchema={Yup.object({
               email: Yup.string()
                 .email("Invalid email address")
-                .required(<span>Required</span>),
+                .required(<span>{t("required")}</span>),
               password: Yup.string()
                 .min(4, "Too short!")
-                .required(<span>Required</span>),
+                .required(<span>{t("required")}</span>),
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
@@ -52,14 +54,15 @@ const LoginPage = () => {
               <Field name="password" type="password" placeholder="Password" />
               <ErrorMessage name="password" />
 
-              <button type="submit">Submit</button>
+              <button type="submit">{t("submit")}</button>
             </Form>
           </Formik>
-          <Link to={"/login/help"}>Lost your Password?</Link>
+          <Link to={"/login/help"}>{t("lost_pass")}</Link>
         </div>
       </div>
       <p>
-        Don't have an account?<Link to={"/register"}>Sign up here!</Link>
+        {t("login_reg1")}
+        <Link to={"/register"}>{t("login_reg2")}</Link>
       </p>
     </section>
   );

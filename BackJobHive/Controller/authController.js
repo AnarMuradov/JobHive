@@ -17,7 +17,7 @@ export const handleLogin = async (req, res) => {
     var token = jwt.sign(
       { email, role: user.role, id: user._id },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "1h" }
+      { expiresIn: "24h" }
     );
     res.status(200).json(token);
   } catch (error) {
@@ -39,7 +39,7 @@ export const handleRegister = async (req, res) => {
     const token = jwt.sign(
       { email: newUser.email, role: newUser.role, id: user._id },
       process.env.JWT_SECRET_KEY,
-      { expiresIn: "1h" }
+      { expiresIn: "24h" }
     );
     res.status(201).json(token);
   } catch (error) {

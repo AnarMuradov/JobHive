@@ -3,6 +3,7 @@ import useLocal from "../Hooks/useLocal";
 export const WishListContext = createContext(); 
 function WishListProvider({ children }) {
   const [wishlist, setWishlist] = useLocal("wishlist", []);
+
   function addWishList(item) {
     const elementindex = wishlist.findIndex((x) => x._id === item._id);
     if (elementindex === -1) {

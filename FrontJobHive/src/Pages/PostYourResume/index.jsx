@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./style.scss";
+import { useTranslation } from "react-i18next";
 const PostYourResume = () => {
+  const { t, i18n } = useTranslation();
+
   const navigate = useNavigate();
   const [api, setApi] = useState([]);
   useEffect(() => {
@@ -64,9 +67,9 @@ const PostYourResume = () => {
     <section className="postResume">
       <div className="postResume_container">
         <div className="postResume_container_title">
-          <span>Advert</span>
+          <span>{t("postcv_title")}</span>
           <Link to={"/PostYourAd"}>
-            <span>Place a Vacancy</span>
+            <span>{t("postcv_vacancylink")}</span>
           </Link>
         </div>
         <div className="postResume_container_advert">
@@ -90,24 +93,38 @@ const PostYourResume = () => {
               phone: "",
             }}
             validationSchema={Yup.object({
-              name: Yup.string().min(1, "Too Short").required("Required"),
-              surname: Yup.string().min(1, "Too Short").required("Required"),
+              name: Yup.string()
+                .min(1, "Too Short")
+                .required(<span>{t("required")}</span>),
+              surname: Yup.string()
+                .min(1, "Too Short")
+                .required(<span>{t("required")}</span>),
               patronymic: Yup.string(),
               gender: Yup.string(),
-              age: Yup.number().min(1, "Too Short").required("Required"),
+              age: Yup.number()
+                .min(1, "Too Short")
+                .required(<span>{t("required")}</span>),
               education: Yup.string(),
               experience: Yup.string(),
               details: Yup.string(),
               categoryId: Yup.string(),
-              position: Yup.string().min(2, "Too Short").required("Required"),
-              region: Yup.string().min(2, "Too short!").required("Required"),
-              salary: Yup.number().min(2, "Too Short").required("Required"),
+              position: Yup.string()
+                .min(2, "Too Short")
+                .required(<span>{t("required")}</span>),
+              region: Yup.string()
+                .min(2, "Too short!")
+                .required(<span>{t("required")}</span>),
+              salary: Yup.number()
+                .min(2, "Too Short")
+                .required(<span>{t("required")}</span>),
               skills: Yup.string(),
               about: Yup.string(),
               email: Yup.string()
                 .email("Invalid email address")
-                .required("Required"),
-              phone: Yup.string().min(9, "Too short!").required("Required"),
+                .required(<span>{t("required")}</span>),
+              phone: Yup.string()
+                .min(9, "Too short!")
+                .required(<span>{t("required")}</span>),
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
@@ -128,8 +145,8 @@ const PostYourResume = () => {
 
               <Field as="select" name="gender" type="text" component="select">
                 <option></option>
-                <option>Male</option>
-                <option>Female</option>
+                <option>{t("male")}</option>
+                <option>{t("female")}</option>
               </Field>
               <ErrorMessage name="gender" />
 
@@ -143,12 +160,12 @@ const PostYourResume = () => {
                 component="select"
               >
                 <option> </option>
-                <option>Science Degree</option>
-                <option>Higher</option>
-                <option>Incomplete Higher</option>
-                <option>Secondary</option>
-                <option>Secondary Technical</option>
-                <option>Specialized Secondary</option>
+                <option>{t("education1")}</option>
+                <option>{t("education2")}</option>
+                <option>{t("education3")}</option>
+                <option>{t("education4")}</option>
+                <option>{t("education5")}</option>
+                <option>{t("education6")}</option>
               </Field>
               <ErrorMessage name="education" />
 
@@ -159,10 +176,10 @@ const PostYourResume = () => {
                 component="select"
               >
                 <option> </option>
-                <option>Less than 1 year</option>
-                <option>From 1 to 3 years</option>
-                <option>From 3 to 5 years</option>
-                <option>More than 5 years</option>
+                <option>{t("experience1")}</option>
+                <option>{t("experience2")}</option>
+                <option>{t("experience3")}</option>
+                <option>{t("experience4")}</option>
               </Field>
               <ErrorMessage name="experience" />
 
@@ -218,7 +235,7 @@ const PostYourResume = () => {
               <Field name="phone" type="text" placeholder="phone" />
               <ErrorMessage name="phone" />
 
-              <button type="submit">Submit</button>
+              <button type="submit">{t("submit")}</button>
             </Form>
           </Formik>
         </div>

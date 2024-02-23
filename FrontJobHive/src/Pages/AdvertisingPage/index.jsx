@@ -1,30 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
+import { useTranslation } from "react-i18next";
 const Advertising = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <section className="advertising">
       <div className="advertising_container">
         <div className="advertising_container_content">
-          <div className="advertising_container_content_title">Advertising</div>
+          <div className="advertising_container_content_title">{t("advertising_title")}</div>
           <div className="advertising_container_content_info">
             <p>
-              WorkWave - это один из самых популярных и стабильно растущих
-              интернет ресурсов Азербайджана, который ежедневно посещают тысячи
-              человек.
+            {t("advertising1")}
             </p>
             <p>
-              Реклама на WorkWave - это один из лучших способов сообщить о ваших
-              брендах, товарах, услугах, акциях и знаменательных событиях очень
-              большой аудитории!
+            {t("advertising2")}
             </p>
             <p>
-              Вы добьетесь как серьезного увеличения узнаваемости вашего бренда,
-              так и широкого распространения информации о ваших продуктах, а
-              также получите отличную возможность простым путем повысить
-              посещаемость интернет сайтов ваших компаний и организаций.
+            {t("advertising3")}
             </p>
-            <p>Мы будем рады сотрудничеству с вами!</p>
+            <p> {t("advertising4")}</p>
             <Link to={`mailto:anarmurado2004@gmail.com`}>
               anarmurado2004@gmail.com
             </Link>

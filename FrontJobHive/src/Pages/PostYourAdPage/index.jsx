@@ -3,7 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./style.scss";
+import { useTranslation } from "react-i18next";
 const PostYourAd = () => {
+  const { t, i18n } = useTranslation();
+
   const navigate = useNavigate();
   const [api, setApi] = useState([]);
   useEffect(() => {
@@ -58,9 +61,9 @@ const PostYourAd = () => {
     <section className="postAd">
       <div className="postAd_container">
         <div className="postAd_container_title">
-          <span>Advert</span>
+          <span>{t("postad_title")}</span>
           <Link to={"/PostYourResume"}>
-            <span>Post Your Resume</span>
+            <span>{t("postad_cvlink")}</span>
           </Link>
         </div>
         <div className="postAd_container_advert">
@@ -82,10 +85,10 @@ const PostYourAd = () => {
             }}
             validationSchema={Yup.object({
               categoryId: Yup.string(),
-              position: Yup.string().min(2, "Too Short").required("Required"),
-              region: Yup.string().min(2, "Too short!").required("Required"),
-              salary: Yup.string().min(2, "Too Short").required("Required"),
-              age: Yup.string().min(1, "Too Short").required("Required"),
+              position: Yup.string().min(2, "Too Short").required(<span>{t("required")}</span>),
+              region: Yup.string().min(2, "Too short!").required(<span>{t("required")}</span>),
+              salary: Yup.string().min(2, "Too Short").required(<span>{t("required")}</span>),
+              age: Yup.string().min(1, "Too Short").required(<span>{t("required")}</span>),
               education: Yup.string(),
               experience: Yup.string(),
               requirements: Yup.string(),
@@ -94,8 +97,8 @@ const PostYourAd = () => {
               contact: Yup.string(),
               email: Yup.string()
                 .email("Invalid email address")
-                .required("Required"),
-              phone: Yup.string().min(9, "Too short!").required("Required"),
+                .required(<span>{t("required")}</span>),
+              phone: Yup.string().min(9, "Too short!").required(<span>{t("required")}</span>),
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
@@ -142,12 +145,12 @@ const PostYourAd = () => {
                 component="select"
               >
                 <option> </option>
-                <option>Science Degree</option>
-                <option>Higher</option>
-                <option>Incomplete Higher</option>
-                <option>Secondary</option>
-                <option>Secondary Technical</option>
-                <option>Specialized Secondary</option>
+                <option>{t("education1")}</option>
+                <option>{t("education2")}</option>
+                <option>{t("education3")}</option>
+                <option>{t("education4")}</option>
+                <option>{t("education5")}</option>
+                <option>{t("education6")}</option>
               </Field>
               <ErrorMessage name="education" />
 
@@ -158,10 +161,10 @@ const PostYourAd = () => {
                 component="select"
               >
                 <option> </option>
-                <option>Less than 1 year</option>
-                <option>From 1 to 3 years</option>
-                <option>From 3 to 5 years</option>
-                <option>More than 5 years</option>
+                <option>{t("experience1")}</option>
+                <option>{t("experience2")}</option>
+                <option>{t("experience3")}</option>
+                <option>{t("experience4")}</option>
               </Field>
               <ErrorMessage name="experience" />
 
@@ -195,7 +198,7 @@ const PostYourAd = () => {
               <Field name="phone" type="text" placeholder="phone" />
               <ErrorMessage name="phone" />
 
-              <button type="submit">Submit</button>
+              <button type="submit">{t("submit")}</button>
             </Form>
           </Formik>
         </div>

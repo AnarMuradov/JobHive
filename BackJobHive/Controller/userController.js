@@ -98,11 +98,13 @@ export const addCvWishlist = async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     res.send(error.message);
-  }
-}; 
+  } 
+};  
 export const showWishlist = async (req, res) => {
   try {
-    const {id} = req.body;
+    // const {id} = req.body;
+    const {id} =req.params
+
     const user= await userModel.findById(id).populate("vacancyWishlist")
     res.status(200).json(user);
   } catch (error) {
@@ -111,7 +113,8 @@ export const showWishlist = async (req, res) => {
 };  
 export const showCvWishlist = async (req, res) => {
   try {
-    const {id} = req.body;
+    // const {id} = req.body;
+    const {id} =req.params
     const user= await userModel.findById(id).populate("cvWishlist")
     res.status(200).json(user);
   } catch (error) {

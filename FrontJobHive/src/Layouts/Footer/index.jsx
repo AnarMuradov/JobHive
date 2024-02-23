@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.scss";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t, i18n } = useTranslation();
+
   return (
     <section className="footer">
       <div className="footer_container">
         <div className="footer_container_logo">
           <img src="/src/Image/footer_logo.png" alt="" />
-          <div className="footer_container_logo_slogan">Shape your success</div>
+          <div className="footer_container_logo_slogan">{t("slogan")}</div>
         </div>
         <div className="footer_container_content">
           <div className="footer_container_content_block">
@@ -17,24 +20,30 @@ const Footer = () => {
             </div>
             <div className="footer_container_content_block_items">
               <ul className="footer_container_content_block_items_list">
-                <Link to={'/about'}><li>About</li></Link>
-               <Link to={"/advertising"}> <li>Advertising</li></Link>
+                <Link to={"/about"}>
+                  <li>{t("footer_about")}</li>
+                </Link>
+                <Link to={"/advertising"}>
+                  <li>{t("footer_advertising")}</li>
+                </Link>
               </ul>
             </div>
           </div>
 
           <div className="footer_container_content_block">
-            <div className="footer_container_content_block_title">Ads</div>
+            <div className="footer_container_content_block_title">
+              {t("footer_ads")}
+            </div>
             <div className="footer_container_content_block_items">
               <ul className="footer_container_content_block_items_list">
                 <li>
-                  <Link to={"/"}>All vacancies</Link>
+                  <Link to={"/"}>{t("footer_AllVacancy")}</Link>
                 </li>
                 <li>
-                  <Link to={'/cv'}>All CV's</Link>
+                  <Link to={"/cv"}>{t("footer_AllCv")}</Link>
                 </li>
                 <li>
-                  <Link>Post your ad</Link>
+                  <Link to={"/PostYourAd"}>{t("footer_post")}</Link>
                 </li>
               </ul>
             </div>

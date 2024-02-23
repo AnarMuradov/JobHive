@@ -16,6 +16,16 @@
       a {
         color: white;
       }
+      &_lang {
+        display: flex;
+        gap: 5px;
+        button {
+          background-color: transparent;
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
+      }
     }
     @media only screen and (max-width: 510px) {
       &_container {

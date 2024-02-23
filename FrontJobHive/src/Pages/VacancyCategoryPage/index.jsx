@@ -1,17 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
 import { Link, useParams } from "react-router-dom";
-import { WishListContext } from "../../Context/WishListContext";
+
 import { SearchContext } from "../../Context/SearchContext";
+import { UserContext } from "../../Context/UserContext";
 
 const VacancyCategoryPage = () => {
+  const {token,decode} = useContext(UserContext)
     const [api, setApi] = useState([]);
     const {search,setSearch} = useContext(SearchContext)
 
     const [category, setCategory] = useState([]);
-    const {addWishList,removeWishList,isWishList} = useContext(WishListContext)
     const { id } = useParams();
   
+    function handleWishlist(vacancyId) {
+
+      fetch("http://localhost:3000/users/addwishlist", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id: decode.id,  vacancyId: vacancyId  }),
+      });
+      console.log(decode);
+  
+    }
     useEffect(() => {
         fetch(`http://localhost:3000/vacancycategories/${id}`)
           .then((res) => res.json())
@@ -47,8 +61,8 @@ const VacancyCategoryPage = () => {
               </div>
               </div>
               <div className="vacancyCategory_container_allCards_card_content_salary">
-              <div className="allCv_container_allCards_card_content_salary_wishlist" onClick={()=>addWishList(x)}>
-            {!isWishList(x) ? <i className="fa-regular fa-heart"></i> :<i onClick={()=>removeWishList(x)} className="fa-solid fa-heart"></i>}
+              <div className="allCv_container_allCards_card_content_salary_wishlist" onClick={()=>handleWishlist(x._id)}>
+             <i className="fa-regular fa-heart"></i> 
             </div>
               <div className="vacancyCategory_container_allCards_card_content_salary_slr">
               {x.salary} AZN

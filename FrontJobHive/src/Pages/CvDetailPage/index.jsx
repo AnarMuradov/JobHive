@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { WishListContext } from "../../Context/WishListContext";
+
 import "./style.scss";
+import { useTranslation } from "react-i18next";
+import { UserContext } from "../../Context/UserContext";
 
 const CvDetailPage = () => {
+  const {token,decode} = useContext(UserContext)
+  const { t, i18n } = useTranslation();
+
     const [api, setApi] = useState([]);
   const { id } = useParams();
   useEffect(() => {
@@ -11,9 +16,20 @@ const CvDetailPage = () => {
       .then((res) => res.json())
       .then((data) => setApi(data));
   }, []);
-  const { addWishList, removeWishList, isWishList } =
-    useContext(WishListContext);
 
+  function handleWishlist(vacancyId) {
+
+    fetch("http://localhost:3000/users/addcvwishlist", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id: decode.id,  vacancyId: vacancyId  }),
+    });
+    console.log(decode);
+
+  }
   return (
     <section className="cvDetail">
       <div className="cvDetail_container">
@@ -30,16 +46,10 @@ const CvDetailPage = () => {
             <div className="cvDetail_container_title_content_salaryColumn">
               <div
                 className="cvDetail_container_title_content_salaryColumn_wishlist"
-                onClick={() => addWishList(api)}
+                onClick={() => handleWishlist(api._id)}
               >
-                {!isWishList(api) ? (
                   <i className="fa-regular fa-heart"></i>
-                ) : (
-                  <i
-                    onClick={() => removeWishList(api)}
-                    className="fa-solid fa-heart"
-                  ></i>
-                )}
+                
               </div>
               <div className="cvDetail_container_title_content_salaryColumn_salary">
                 {api.salary} AZN
@@ -51,23 +61,23 @@ const CvDetailPage = () => {
           <div className="cvDetail_container_vacancyInfo_content">
             <div className="cvDetail_container_vacancyInfo_content_column">
               <ul className="cvDetail_container_vacancyInfo_content_column_list1">
-                <li>Region</li>
-                <li>Age</li>
-                <li>Gender</li>
-                {api.patronymic ? <li>Full name</li> :null}
+                <li>{t("detail_region")}</li>
+                <li>{t("detail_age")}</li>
+                <li>{t("cv_detail_gender")}</li>
+                {api.patronymic ? <li>{t("cv_detail_fullname")}</li> :null}
               </ul>
               <ul className="cvDetail_container_vacancyInfo_content_column_list">
                 <li>{api.region}</li>
-                <li>{api.age} years</li>
+                <li>{api.age} {t("cv_detail_years")}</li>
                 <li>{api.gender}</li>
                 {api.patronymic ? <li>{api.name} {api?.patronymic} {api.surname}</li> :null}
               </ul>
             </div>
             <div className="cvDetail_container_vacancyInfo_content_column">
               <ul className="cvDetail_container_vacancyInfo_content_column_list1">
-                <li>Phone</li>
+                <li>{t("cv_detail_phone")}</li>
                 <li>Email</li>
-                <li>Published on</li>
+                <li>{t("cv_detail_published")}</li>
               </ul>
               <ul className="cvDetail_container_vacancyInfo_content_column_list">
                 <Link to={`tel:${api.phones}`}>
@@ -85,11 +95,11 @@ const CvDetailPage = () => {
           <div className="cvDetail_container_description_content">
             <div className="cvDetail_container_description_content_text">
               <div className="cvDetail_container_description_content_text_row">
-              <span>Education</span>
+              <span>{t("detail_education")}</span>
               <p>{api.education}</p>
               </div>
               <div className="cvDetail_container_description_content_text_row">
-              <span>Skills</span>
+              <span>{t("cv_detail_skills")}</span>
               <p>{api.skills}</p>
               </div>
 
@@ -97,11 +107,11 @@ const CvDetailPage = () => {
             <div className="cvDetail_container_description_content_text">
             
             <div className="cvDetail_container_description_content_text_row">
-            <span>Experience</span>
+            <span>{t("detail_experience")}</span>
               <p>{api.experience}</p>
             </div>
             <div className="cvDetail_container_description_content_text_row">
-            <span>About</span>
+            <span>{t("cv_detail_about")}</span>
               <p>{api.about}</p>
             </div>
             </div>

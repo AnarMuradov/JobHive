@@ -26,12 +26,12 @@ userRouter.put("/addcvwishlist", authMiddleware(["User", "Admin"]), addCvWishlis
 
 
 userRouter.put(
-  "/showwishlist",
+  "/showwishlist/:id",
   authMiddleware(["User", "Admin"]),
   showWishlist
 );
 userRouter.put(
-  "/showcvwishlist",
+  "/showcvwishlist/:id",
   authMiddleware(["User", "Admin"]),
   showCvWishlist
 );

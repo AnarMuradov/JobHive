@@ -4,7 +4,10 @@ import "./style.scss";
 import { UserContext } from "../../Context/UserContext";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useTranslation } from "react-i18next";
 const Register = () => {
+  const { t, i18n } = useTranslation();
+
   const { addToken } = useContext(UserContext);
   const navigate = useNavigate();
   function handleSubmit({ username, email, password }) {
@@ -30,20 +33,20 @@ const Register = () => {
     <section className="register">
       <div className="register_container">
         <div className="register_container_content">
-          <div className="register_container_content_title">Register</div>
+          <div className="register_container_content_title">{t("register")}</div>
 
           <Formik
             initialValues={{ username: "", email: "", password: "" }}
             validationSchema={Yup.object({
               username: Yup.string()
                 .max(15, "Must be 15 characters or less")
-                .required(<span>Required</span>),
+                .required(<span>{t("required")}</span>),
               email: Yup.string()
                 .email("Invalid email address")
-                .required(<span>Required</span>),
+                .required(<span>{t("required")}</span>),
               password: Yup.string()
                 .min(8, "Too short!")
-                .required(<span>Required</span>),
+                .required(<span>{t("required")}</span>),
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
@@ -62,13 +65,13 @@ const Register = () => {
               <Field name="password" type="password" placeholder="Password" />
               <ErrorMessage name="password" />
 
-              <button type="submit">Submit</button>
+              <button type="submit">{t("submit")}</button>
             </Form>
           </Formik>
         </div>
       </div>
       <p>
-        Have an account? <Link to={"/login"}>Log in</Link>
+      {t("register1")}<Link to={"/login"}>{t("register2")}</Link>
       </p>
     </section>
   );

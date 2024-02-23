@@ -5,6 +5,7 @@ import "./index.css";
 import WishListProvider from "./Context/WishListContext.jsx";
 import SearchProvider from "./Context/SearchContext.jsx";
 import UserProvider from "./Context/UserContext.jsx";
+import "./i18n.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.Fragment>
